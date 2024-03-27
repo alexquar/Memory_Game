@@ -39,7 +39,7 @@ function App() {
 
       if (choiceOne.src === choiceTwo.src) {
         setCards(prevCards => {
-          return prevCards.map(()=>{
+          return prevCards.map(card=>{
             if(card.src === choiceOne.src){
               return {...card, matched:true}
             } else {
@@ -50,14 +50,14 @@ function App() {
         resetTurn()
       } else {
 
-        resetTurn()
+        setTimeout(()=>resetTurn(), 1000)
       }
 
     }
   }, [choiceOne, choiceTwo])
 
 
-  
+
 
   // reset choices & increase turn
   const resetTurn = () => {
@@ -74,7 +74,7 @@ function App() {
 
     <div className="card-grid">
       {cards.map(card => (
-       <SingleCard key={card.id} card={card} handleChoice={handleChoice}/>
+       <SingleCard key={card.id} card={card} handleChoice={handleChoice} flipped={card===choiceOne || card===choiceTwo || card.matched} />
       ))}
     </div>
 
