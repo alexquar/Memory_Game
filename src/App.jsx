@@ -23,7 +23,8 @@ function App() {
     const shuffledCards = [...cardImages, ...cardImages]
       .sort(() => Math.random() - 0.5)
       .map(card => ({ ...card, id: Math.random() }))
-      
+      setChoiceOne(null)
+      setChoiceTwo(null)
     setCards(shuffledCards)
     setTurns(0)
   }
@@ -33,6 +34,10 @@ function App() {
     console.log(card)
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card)
   }
+
+  useEffect(()=>{
+    shuffleCards()
+  }, [])
 
   // compare 2 selected cards
   useEffect(() => {
@@ -80,7 +85,7 @@ function App() {
        <SingleCard key={card.id} card={card} handleChoice={handleChoice} flipped={card===choiceOne || card===choiceTwo || card.matched} disabled={disabled} />
       ))}
     </div>
-
+        <p>Turns: {turns}</p>
   </div>
 );
 }
